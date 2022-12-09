@@ -1,0 +1,11 @@
+<div class="bg-slate-300 py-[40px]">
+  <div class="app-container">
+    <app-pagination
+      [totalItem]="totalItem"
+      [totalTablePage]="totalTablePage"
+      [currentTablePage]="currentTablePage"
+      (onNavigateTablePage)="navigateTablePage($event)"
+    ></app-pagination>
+    <app-table [pokemonList]="pokemonList"></app-table>
+  </div>
+</div>

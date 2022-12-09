@@ -1,0 +1,32 @@
+<div class="bg-slate-300 py-[30px] min-h-[calc(100vh-150px)]">
+  <div class="app-container">
+    <div class="py-[40px]">
+      <button (click)="onClickBack()" mat-raised-button color="primary">
+        Back
+      </button>
+      <div class="flex mt-[40px] items-center">
+        <div class="mr-[100px] bg-slate-500 rounded-full">
+          <img class="w-[300px] rounded-full" [src]="pokemon?.image" alt="" />
+        </div>
+        <div class="text-[16px]">
+          <div class="text-[30px] font-bold mb-[20px]">
+            Id: #{{ pokemon?.id }}
+          </div>
+          <div class="mb-[10px]">Weight: {{ pokemon?.weight }}</div>
+          <div class="mb-[10px]">Height: {{ pokemon?.height }}</div>
+          <div class="mb-[10px]">Experience: {{ pokemon?.experience }}</div>
+
+          <div class="flex mt-[30px]">
+            <div class="mr-[40px]">Abilities: {{ pokemon?.ability }}</div>
+            <div class="mr-[40px]">Forms: {{ pokemon?.form }}</div>
+            <div class="mr-[40px]">
+              Game Indices: {{ pokemon?.gameIndices }}
+            </div>
+            <div class="mr-[40px]">Held Items: {{ pokemon?.heldItem }}</div>
+            <div class="">Moves: {{ pokemon?.move }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

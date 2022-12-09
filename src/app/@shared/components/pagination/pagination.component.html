@@ -1,0 +1,71 @@
+<div class="flex justify-between items-center mb-[30px]">
+  <div class="text-[20px] font-bold">Total: {{ totalItem }}</div>
+  <div *ngIf="totalTablePage > 1">
+    <div class="flex">
+      <button
+        class="transition-all duration-300 bg-cyan-100 w-[40px] h-[40px] rounded-full flex justify-center items-center hover:bg-cyan-600 mr-[10px]"
+        [ngClass]="{
+          'pointer-events-none opacity-[0.4]': currentTablePage === 1
+        }"
+        (click)="navigateTablePage(currentTablePage - 1)"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="flex">
+        <div
+          class="transition-all duration-300 bg-transparent outline outline-2 outline-offset-[-2px] outline-cyan-100 w-[40px] h-[40px] rounded-full flex justify-center items-center hover:bg-cyan-600 cursor-pointer mr-[10px] text-[16px] font-bold text-[#333]"
+          [ngClass]="{
+            'bg-cyan-600 ': currentTablePage === 1
+          }"
+          (click)="navigateTablePage(1)"
+        >
+          1
+        </div>
+        <div
+          class="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-[10px] text-[20px] font-bold text-[#333]"
+          *ngIf="currentTablePage > 3 && totalTablePage > 5"
+        >
+          ...
+        </div>
+        <ng-container *ngFor="let item of getMiddlePagination()">
+          <div
+            class="transition-all duration-300 bg-transparent outline outline-2 outline-offset-[-2px] outline-cyan-100 w-[40px] h-[40px] rounded-full flex justify-center items-center hover:bg-cyan-600 cursor-pointer mr-[10px] text-[16px] font-bold text-[#333]"
+            [ngClass]="{
+              'bg-cyan-600 ': item === currentTablePage
+            }"
+            (click)="navigateTablePage(item)"
+          >
+            {{ item }}
+          </div>
+        </ng-container>
+        <div
+          class="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-[10px] text-[20px] font-bold text-[#333]"
+          *ngIf="currentTablePage < totalTablePage - 2 && totalTablePage > 5"
+        >
+          ...
+        </div>
+        <div
+          class="transition-all duration-300 bg-transparent outline outline-2 outline-offset-[-2px] outline-cyan-100 w-[40px] h-[40px] rounded-full flex justify-center items-center hover:bg-cyan-600 cursor-pointer mr-[10px] text-[16px] font-bold text-[#333]"
+          [ngClass]="{
+            'bg-cyan-600 ': currentTablePage === totalTablePage
+          }"
+          (click)="navigateTablePage(totalTablePage)"
+        >
+          {{ totalTablePage }}
+        </div>
+      </div>
+
+      <button
+        class="transition-all duration-300 bg-cyan-100 w-[40px] h-[40px] rounded-full flex justify-center items-center hover:bg-cyan-600"
+        [ngClass]="{
+          'pointer-events-none opacity-[0.4]':
+            currentTablePage === totalTablePage
+        }"
+        (click)="navigateTablePage(currentTablePage + 1)"
+      >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

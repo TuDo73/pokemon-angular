@@ -1,0 +1,73 @@
+<div class="pb-[100px]">
+  <table mat-table [dataSource]="pokemonList" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="!bg-[#3F51B5] !text-white !font-bold !text-[18px]"
+      >
+        Id
+      </th>
+      <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="image">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="!bg-[#3F51B5] !text-white !font-bold !text-[18px]"
+      >
+        Image
+      </th>
+      <td mat-cell *matCellDef="let item">
+        <div class="w-[50px] h-[50px] flex justify-center items-center">
+          <img [src]="item.image" alt="pokemon image" />
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="!bg-[#3F51B5] !text-white !font-bold !text-[18px]"
+      >
+        Name
+      </th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.name | uppercaseFirstLetter }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="url">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="!bg-[#3F51B5] !text-white !font-bold !text-[18px]"
+      >
+        Url
+      </th>
+      <td mat-cell *matCellDef="let item">{{ item.url }}</td>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="!bg-[#3F51B5] !text-white !font-bold !text-[18px]"
+      >
+        View
+      </th>
+      <td mat-cell *matCellDef="let item">
+        <div>
+          <button
+            (click)="goToDetailPage(item.id)"
+            mat-raised-button
+            color="warn"
+          >
+            View
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedMatColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedMatColumns"></tr>
+  </table>
+</div>
