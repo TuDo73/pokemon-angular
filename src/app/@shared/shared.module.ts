@@ -6,6 +6,7 @@ import { CustomMaterial } from '@app/custom-material.module';
 import { UppercaseFirstLetterPipe } from './pipe/uppercase-first-letter.pipe';
 import { TableComponent } from './components/table/table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     UppercaseFirstLetterPipe,
     TableComponent,
     PaginationComponent,
+    LoadingComponent,
   ],
   exports: [
     LayoutComponent,
@@ -21,6 +23,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     UppercaseFirstLetterPipe,
     TableComponent,
     PaginationComponent,
+    LoadingComponent
   ],
   imports: [CommonModule, CustomMaterial],
 })

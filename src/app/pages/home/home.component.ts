@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { POKEMON_IMAGE_URL } from '@app/@shared/helper/constant';
 import { PokemonItem } from '@app/@shared/models/pokemon';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
+import { LoadingService } from '@app/@shared/services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -18,14 +18,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   totalTablePage = 0;
   currentTablePage = 1;
 
-  constructor(private pokemonService: PokemonService, private router: Router) {}
+  constructor(
+    private pokemonService: PokemonService,
+    private loader: LoadingService
+  ) {}
 
   getPokemonList() {
+    this.loader.setLoading(true);
     this.fetchPokemonSubs = this.pokemonService
       .fetchPokemon(this.fetchPokemonParam.limit, this.fetchPokemonParam.offset)
-      .subscribe((response) => {
-        this.setTotal(response.count);
-        this.convertPokemonItem(response.results);
+      .subscribe({
+        next: (response) => {
+          this.setTotal(response.count);
+          this.convertPokemonItem(response.results);
+        },
+        error: (err) => console.log({ err }),
+        complete: () => this.loader.setLoading(false),
       });
   }
 

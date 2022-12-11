@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { POKEMON_IMAGE_URL } from '@app/@shared/helper/constant';
 import { PokemonItem, PokemonResponse } from '@app/@shared/models/pokemon';
+import { LoadingService } from '@app/@shared/services/loading.service';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
 import { Subscription } from 'rxjs';
 
@@ -17,7 +18,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private loader: LoadingService
   ) {}
 
   onClickBack() {
@@ -43,12 +45,17 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   getPokemonDetail() {
+    this.loader.setLoading(true);
     const currentId = this.route.snapshot.params['id'];
 
     this.fetchPokemonSubs = this.pokemonService
       .fetchPokemonDetail(currentId)
-      .subscribe((res) => {
-        this.convertPokemonDetailData(res);
+      .subscribe({
+        next: (res) => {
+          this.convertPokemonDetailData(res);
+        },
+        error: (err) => console.log({ err }),
+        complete: () => this.loader.setLoading(false),
       });
   }
 
