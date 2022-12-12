@@ -6,6 +6,7 @@
       [currentTablePage]="currentTablePage"
       (onNavigateTablePage)="navigateTablePage($event)"
     ></app-pagination>
+    <app-search (onSearch)="handleSearchPokemon($event)"></app-search>
     <app-table [pokemonList]="pokemonList"></app-table>
   </div>
 </div>

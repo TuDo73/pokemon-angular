@@ -7,6 +7,8 @@ import { UppercaseFirstLetterPipe } from './pipe/uppercase-first-letter.pipe';
 import { TableComponent } from './components/table/table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     TableComponent,
     PaginationComponent,
     LoadingComponent,
+    SearchComponent,
   ],
   exports: [
     LayoutComponent,
@@ -23,8 +26,9 @@ import { LoadingComponent } from './components/loading/loading.component';
     UppercaseFirstLetterPipe,
     TableComponent,
     PaginationComponent,
-    LoadingComponent
+    LoadingComponent,
+    SearchComponent,
   ],
-  imports: [CommonModule, CustomMaterial],
+  imports: [CommonModule, CustomMaterial, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

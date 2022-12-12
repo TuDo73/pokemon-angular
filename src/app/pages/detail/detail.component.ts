@@ -64,6 +64,6 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.fetchPokemonSubs && this.fetchPokemonSubs.unsubscribe;
+    this.fetchPokemonSubs && this.fetchPokemonSubs.unsubscribe();
   }
 }

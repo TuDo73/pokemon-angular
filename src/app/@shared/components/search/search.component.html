@@ -1,0 +1,7 @@
+<div class="pb-[10px]">
+  <mat-form-field appearance="fill" class="w-[500px]">
+    <mat-label>Search pokemon name</mat-label>
+    <input matInput [formControl]="searchTerm" (input)="onChangeSearch()" />
+    <mat-icon class="absolute right-[5px] top-[17px]">search</mat-icon>
+  </mat-form-field>
+</div>
