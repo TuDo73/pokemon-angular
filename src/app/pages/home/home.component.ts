@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { POKEMON_IMAGE_URL } from '@app/@shared/helper/constant';
 import { PokemonItem } from '@app/@shared/models/pokemon';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
 import { LoadingService } from '@app/@shared/services/loading.service';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-home',
@@ -64,7 +64,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const convertData: PokemonItem[] = data.map((item) => {
       const pokemon = {
         id: this.getPokemonId(item.url || '1'),
-        image: `${POKEMON_IMAGE_URL}/${this.getPokemonId(item.url || '1')}.png`,
+        image: `${environment.imageUrl}/${this.getPokemonId(
+          item.url || '1'
+        )}.png`,
         url: item.url,
         name: item.name,
       };

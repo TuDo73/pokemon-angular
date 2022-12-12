@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { POKEMON_IMAGE_URL } from '@app/@shared/helper/constant';
 import { PokemonItem, PokemonResponse } from '@app/@shared/models/pokemon';
 import { LoadingService } from '@app/@shared/services/loading.service';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
+import { environment } from '@env/environment';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -29,7 +29,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   convertPokemonDetailData(data: PokemonResponse) {
     const convertData = {
       id: this.route.snapshot.params['id'],
-      image: `${POKEMON_IMAGE_URL}/${this.route.snapshot.params['id']}.png`,
+      image: `${environment.imageUrl}/${this.route.snapshot.params['id']}.png`,
       name: data.name,
       weight: data.weight,
       height: data.height,

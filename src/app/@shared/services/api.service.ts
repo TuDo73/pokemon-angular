@@ -1,8 +1,7 @@
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Observable, Subscriber } from 'rxjs';
-
-const POKEMON_ENDPOINT = 'https://pokeapi.co/api/v2';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +32,7 @@ export class ApiService {
   ): Observable<any> {
     return new Observable((observer: Subscriber<any>): void => {
       this.httpClient
-        .request<T>(method, `${POKEMON_ENDPOINT}${url}`, options)
+        .request<T>(method, `${environment.pokemonApi}${url}`, options)
         .subscribe({
           next: (response: HttpEvent<T>) => {
             observer.next(response);
