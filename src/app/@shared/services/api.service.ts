@@ -40,7 +40,6 @@ export class ApiService {
           },
           error: (error: any) => {
             observer.error(error);
-            observer.complete();
           },
         });
     });

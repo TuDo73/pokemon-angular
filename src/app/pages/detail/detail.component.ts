@@ -4,7 +4,7 @@ import { PokemonItem, PokemonResponse } from '@app/@shared/models/pokemon';
 import { LoadingService } from '@app/@shared/services/loading.service';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
 import { environment } from '@env/environment';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -50,12 +50,12 @@ export class DetailComponent implements OnInit, OnDestroy {
 
     this.fetchPokemonSubs = this.pokemonService
       .fetchPokemonDetail(currentId)
+      .pipe(finalize(() => this.loader.setLoading(false)))
       .subscribe({
         next: (res) => {
           this.convertPokemonDetailData(res);
         },
         error: (err) => console.log({ err }),
-        complete: () => this.loader.setLoading(false),
       });
   }
 

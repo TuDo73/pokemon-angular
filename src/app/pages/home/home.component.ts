@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, Subscription } from 'rxjs';
+import { finalize, map, Subscription } from 'rxjs';
 import { PokemonItem } from '@app/@shared/models/pokemon';
 import { PokemonService } from '@app/@shared/services/pokemon.service';
 import { LoadingService } from '@app/@shared/services/loading.service';
@@ -28,13 +28,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loader.setLoading(true);
     this.fetchPokemonSubs = this.pokemonService
       .fetchPokemon(this.fetchPokemonParam.limit, this.fetchPokemonParam.offset)
+      .pipe(finalize(() => this.loader.setLoading(false)))
       .subscribe({
         next: (response) => {
           this.setTotal(response.count);
           this.convertPokemonItem(response.results);
         },
         error: (err) => console.log({ err }),
-        complete: () => this.loader.setLoading(false),
       });
   }
 
@@ -43,16 +43,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.totalTablePage = Math.ceil(value / 20);
   }
 
-  navigateTablePageByRequest(value: number) {
-    if (!value) return;
+  // navigateTablePage(value: number) {
+  //   if (!value) return;
 
-    this.currentTablePage = value;
-    this.fetchPokemonParam = {
-      ...this.fetchPokemonParam,
-      offset: (this.currentTablePage - 1) * 20,
-    };
-    this.getPokemonList();
-  }
+  //   this.currentTablePage = value;
+  //   this.fetchPokemonParam = {
+  //     ...this.fetchPokemonParam,
+  //     offset: (this.currentTablePage - 1) * 20,
+  //   };
+  //   this.getPokemonList();
+  // }
 
   navigateTablePage(value: number) {
     if (!value) return;
@@ -128,7 +128,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             };
           });
           return convertData;
-        })
+        }),
+        finalize(() => this.loader.setLoading(false))
       )
       .subscribe({
         next: (response) => {
@@ -137,8 +138,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.filteredPokemon = response;
           this.pokemonList = this.filteredPokemon.slice(0, 20);
         },
-        error: (err) => console.log({ err }),
-        complete: () => this.loader.setLoading(false),
+        error: (err) => console.log('test 123', { err }),
       });
   }
 

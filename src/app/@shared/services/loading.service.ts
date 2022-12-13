@@ -12,7 +12,7 @@ export class LoadingService {
     return this.isLoading;
   }
 
-  setLoading(loading: boolean) {
-    this.isLoading = loading;
+  setLoading(value: boolean) {
+    this.isLoading = value;
   }
 }
